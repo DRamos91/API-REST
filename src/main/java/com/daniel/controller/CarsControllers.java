@@ -31,7 +31,9 @@ public class CarsControllers {
 			Arrays.stream(cars).forEach(car -> System.out
 					.println(car.get_id() + car.getTitle() + 
 							car.getBrand() + car.getPrice() + car.getAge()));
+
 			return Arrays.asList(cars);
+			
 	}
 	
 	@GetMapping("/{_id}")

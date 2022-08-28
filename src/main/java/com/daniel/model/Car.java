@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Document
-public class Cars {
+public class Car {
 
 	@Id
 	private String _id;
@@ -15,12 +15,12 @@ public class Cars {
 	private String title;
 	private String brand;
 	private String price;
-	private int age;
+	private Integer age;
 
-	public Cars() {
+	public Car() {
 		
 	}
-	public Cars(String _id, String title, String brand, String price, int age) {
+	public Car(String _id, String title, String brand, String price, int age) {
 		super();
 		this._id = _id;
 		this.title = title;

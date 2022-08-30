@@ -38,6 +38,7 @@ public class CarController {
 		String url = "http://api-test.bhut.com.br:3000/api/cars";
 		RestTemplate rt = new RestTemplate();
 		Car[] cars = rt.getForObject(url, Car[].class);
+		
 
 		return Arrays.asList(cars);
 
@@ -49,27 +50,28 @@ public class CarController {
 	}
 	
 	@GetMapping(value = "/logs")
-	public List<Car> obterCarros(@RequestParam String text) {
+	public List<Car> obterCarros(@RequestBody String _id) {
 		List<Car> list = carsService.obterCarros();
-//		return this.carsService.obterCarros();
-		return (List<Car>) ResponseEntity.ok().body(list);
+		
+		return this.carsService.obterCarros();
+		
 
 	}
 	
 	@PostMapping(value = "/createCar")
-	public Car setAllCars(@RequestBody Car car) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		sdf.setTimeZone(TimeZone.getTimeZone("GMT-3"));
+	public List<Car> setAllCars(@RequestBody Car car) {
+//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//		sdf.setTimeZone(TimeZone.getTimeZone("GMT-3"));
 		
-		Date d = Date.from(Instant.now());
+//		Date d = Date.from(Instant.now());
 		
 		String url = "http://api-test.bhut.com.br:3000/api/cars";
 		RestTemplate rt = new RestTemplate();
 		Car cars = rt.postForObject(url, car, Car.class);
-
+			
 		carsRepository.saveAll(Arrays.asList(cars));
 		
-		return cars;
+		return Arrays.asList(cars);
 
 	}
 

@@ -8,5 +8,6 @@ import com.daniel.model.Car;
 
 public interface CarRepository extends MongoRepository<Car, String>{
 
+	
 
 }

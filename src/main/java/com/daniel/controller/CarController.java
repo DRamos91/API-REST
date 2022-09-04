@@ -3,18 +3,17 @@ package com.daniel.controller;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -50,8 +49,8 @@ public class CarController {
 	}
 	
 	@GetMapping(value = "/logs")
-	public List<Car> obterCarros(@RequestBody String _id) {
-		List<Car> list = carsService.obterCarros();
+	public List<Car> obterCarros(@RequestBody String _id, String car_id, Date data) {
+	//	List<Car> list = carsService.obterCarros();
 		
 		return this.carsService.obterCarros();
 		
@@ -59,20 +58,25 @@ public class CarController {
 	}
 	
 	@PostMapping(value = "/createCar")
-	public List<Car> setAllCars(@RequestBody Car car) {
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//		sdf.setTimeZone(TimeZone.getTimeZone("GMT-3"));
-		
-//		Date d = Date.from(Instant.now());
+	public Car setAllCars(@RequestBody Car car) {
+		Date d = Date.from(Instant.now());
+		Calendar calendar = Calendar.getInstance(); 
+		calendar.setTime(d);
 		
 		String url = "http://api-test.bhut.com.br:3000/api/cars";
 		RestTemplate rt = new RestTemplate();
-		Car cars = rt.postForObject(url, car, Car.class);
-			
-		carsRepository.saveAll(Arrays.asList(cars));
+		car = rt.postForObject(url, car, Car.class);
 		
-		return Arrays.asList(cars);
+		car.set_car_id(car.get_car_id());
+		car.set_id(car.get_id());
+		car.setData(d);
+		return carsRepository.save(car);
 
 	}
+	//A aplicação esta funcionando Get e post, tanto no localhost quanto no mongoDB. 
+	//Ficou faltando adaptar a aplicação de acordo com o teste: Crie uma tabela em banco nosql 
+	//para armazenar os log com os campos mínimos de: id, data_hora e car_id;
+	
+	
 
 }

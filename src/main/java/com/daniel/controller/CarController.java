@@ -1,12 +1,10 @@
 package com.daniel.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,7 +65,7 @@ public class CarController {
 		RestTemplate rt = new RestTemplate();
 		car = rt.postForObject(url, car, Car.class);
 		
-		car.set_car_id(car.get_car_id());
+		car.setCar_id(car.getCar_id());
 		car.set_id(car.get_id());
 		car.setData(d);
 		return carsRepository.save(car);

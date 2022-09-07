@@ -2,9 +2,9 @@ package com.daniel;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
-import com.daniel.model.Car;
-
+@EnableMongoAuditing
 @SpringBootApplication
 public class ApiRestApplication {
 

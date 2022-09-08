@@ -9,9 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
 @Builder
@@ -21,17 +19,16 @@ import lombok.Setter;
 public class Car {
 
 	@Id
-	@Getter @Setter private String _id;
-	
-	@Getter @Setter private String car_id;
+	private String _id;
 
-	@Getter @Setter private String title;
-	@Getter @Setter private String brand;
-	@Getter @Setter private String price;
-	@Getter @Setter private Integer age;
-	
+	private String car_id;
+
+	private String title;
+	private String brand;
+	private String price;
+	private Integer age;
+
 	@LastModifiedDate
 	private Date data;
-	
 
 }

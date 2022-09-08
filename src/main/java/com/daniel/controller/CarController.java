@@ -47,7 +47,7 @@ public class CarController {
 	}
 	
 	@GetMapping(value = "/logs")
-	public List<Car> obterCarros(@RequestBody String _id, String car_id, Date data) {
+	public List<Car> obterCarros(@RequestBody String _id) {
 	//	List<Car> list = carsService.obterCarros();
 		
 		return this.carsService.obterCarros();
@@ -65,9 +65,6 @@ public class CarController {
 		RestTemplate rt = new RestTemplate();
 		car = rt.postForObject(url, car, Car.class);
 		
-		car.setCar_id(car.getCar_id());
-		car.set_id(car.get_id());
-		car.setData(d);
 		return carsRepository.save(car);
 
 	}
